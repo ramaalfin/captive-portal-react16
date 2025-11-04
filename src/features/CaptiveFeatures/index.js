@@ -231,7 +231,13 @@ export default function CaptiveFeatures() {
 
   // --- render section
   if (loading) {
-    return <p>Memuat iklan...</p>;
+    return (
+      <div className="w-full max-w-4xl mx-auto pb-28 lg:pb-32 lg:py-8">
+        <div className="flex flex-col min-h-screen justify-center items-center">
+          <p>Memuat iklan...</p>
+        </div>
+      </div>
+    );
   }
 
   if (error) {

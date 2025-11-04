@@ -25,7 +25,7 @@ function AdCard(props) {
             ad.banner_url
           }
           alt={ad.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
           loading="lazy"
         />
       ) : ad.banner_url ? (
@@ -37,7 +37,7 @@ function AdCard(props) {
             ad.banner_url
           }
           alt={ad.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
           loading="lazy"
         />
       ) : ad.video_url ? (
@@ -45,7 +45,7 @@ function AdCard(props) {
         <img
           src={urlMinioThumbnails + "/" + ad.thumbnail_url}
           alt={ad.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
           loading="lazy"
         />
       ) : null}
