@@ -260,14 +260,14 @@ export default function CaptiveFeatures() {
           <img
             src={urlMinioBanners + "/" + selectedAd.banner_url}
             alt={selectedAd.title}
-            className="w-64 h-[30rem] object-contain mb-2 rounded-lg sm:w-72 lg:w-80"
+            className="w-full min-h-screen object-contain rounded-lg"
           />
           <div
             className="w-full flex flex-row justify-between"
             style={{ backgroundColor: "#0E0E0E" }}
           >
             {bannerCounter > 0 && (
-              <p className="flex items-center justify-center border border-white rounded-full text-white w-10 h-10 mt-2">
+              <p className="flex items-center justify-center border border-white rounded-full text-white w-10 h-10 -mt-12">
                 {bannerCounter}
               </p>
             )}

@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
 function AdCard(props) {
   const { ad, onSelect, urlMinioBanners, urlMinioVideos, urlMinioThumbnails } =
     props;
 
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const imageSrc = ad.banner_url
+    ? `${urlMinioBanners}/${ad.banner_url}`
+    : ad.thumbnail_url
+    ? `${urlMinioThumbnails}/${ad.thumbnail_url}`
+    : "";
+
   return (
     <div
       key={ad.id}
-      className="relative w-full lg:w-48 h-80 rounded-lg overflow-hidden shadow-lg"
+      className="
+        relative
+        w-[85%] sm:w-[70%] md:w-64 lg:w-48
+        h-64 sm:h-72 md:h-96
+        rounded-xl overflow-hidden shadow-lg
+        mx-auto
+        transition-all duration-300
+      "
     >
       <button
         onClick={() => onSelect(ad)}
@@ -16,8 +30,13 @@ function AdCard(props) {
         Pilih
       </button>
 
-      {/* Case 3: Ada banner & video */}
-      {ad.banner_url && ad.video_url ? (
+      {!imageLoaded && (
+        <div className="w-full h-full flex items-center justify-center bg-gray-200 animate-pulse">
+          <p className="text-xs text-gray-500">Memuat...</p>
+        </div>
+      )}
+
+      {/* {ad.banner_url && ad.video_url ? (
         <img
           src={
             (urlMinioBanners ? urlMinioBanners : urlMinioThumbnails) +
@@ -29,7 +48,6 @@ function AdCard(props) {
           loading="lazy"
         />
       ) : ad.banner_url ? (
-        // Case 1: Hanya banner
         <img
           src={
             (urlMinioBanners ? urlMinioBanners : urlMinioThumbnails) +
@@ -41,14 +59,26 @@ function AdCard(props) {
           loading="lazy"
         />
       ) : ad.video_url ? (
-        // Case 2: Hanya video → tampilkan thumbnail-nya
         <img
           src={urlMinioThumbnails + "/" + ad.thumbnail_url}
           alt={ad.title}
           className="w-full h-full object-contain"
           loading="lazy"
         />
-      ) : null}
+      ) : null} */}
+
+      <img
+        crossOrigin="anonymous"
+        src={imageSrc}
+        alt={ad.title}
+        className={`
+          w-full h-full object-contain
+          transition-opacity duration-500
+          ${imageLoaded ? "opacity-100" : "opacity-0"}
+        `}
+        onLoad={() => setImageLoaded(true)}
+        loading="lazy"
+      />
 
       <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
         {ad.title}
